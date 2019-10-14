@@ -1,0 +1,15 @@
+spring:
+  rabbitmq:
+    username: rabbit_user
+    password: rabbit_pass
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+
+#logging:
+#  level:
+#    org:
+#      springframework: DEBUG

@@ -1,0 +1,26 @@
+server:
+  port: 9090
+
+
+
+spring:
+  rabbitmq:
+    username: rabbit_user
+    password: rabbit_pass
+
+  data:
+    cassandra:
+      keyspace-name: athena
+      contact-points: localhost
+      port: 9042
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+#logging:
+#  level:
+#    org:
+#      springframework: DEBUG

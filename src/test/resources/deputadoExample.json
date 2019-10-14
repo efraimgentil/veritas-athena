@@ -1,0 +1,38 @@
+
+{
+  "id": 204554,
+  "uri": "https://dadosabertos.camara.leg.br/api/v2/deputados/204554",
+  "nomeCivil": "JOSE ABILIO SILVA DE SANTANA",
+  "ultimoStatus": {
+    "id": 204554,
+    "uri": "https://dadosabertos.camara.leg.br/api/v2/deputados/204554",
+    "nome": "ABÍLIO SANTANA",
+    "siglaPartido": "PL",
+    "uriPartido": "https://dadosabertos.camara.leg.br/api/v2/partidos/37906",
+    "siglaUf": "BA",
+    "idLegislatura": 56,
+    "urlFoto": "https://www.camara.leg.br/internet/deputado/bandep/204554.jpg",
+    "data": "2019-02-01T11:45",
+    "nomeEleitoral": "ABÍLIO SANTANA",
+    "gabinete": {
+      "nome": "531",
+      "predio": "4",
+      "sala": "531",
+      "andar": "5",
+      "telefone": "3215-5531",
+      "email": "dep.abiliosantana@camara.leg.br"
+    },
+    "situacao": "Exercício",
+    "condicaoEleitoral": "Titular",
+    "descricaoStatus": null
+  },
+  "cpf": "36607606504",
+  "sexo": "M",
+  "urlWebsite": null,
+  "redeSocial": [],
+  "dataNascimento": "1965-02-13",
+  "dataFalecimento": null,
+  "ufNascimento": "BA",
+  "municipioNascimento": "Salvador",
+  "escolaridade": "Superior Incompleto"
+}

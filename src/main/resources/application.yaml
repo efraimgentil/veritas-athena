@@ -1,0 +1,23 @@
+
+server:
+  port: 9090
+spring:
+  rabbitmq:
+    host: ${RABBITMQ_HOST:localhost}
+    port: ${RABBITMQ_PORT:5672}
+    username: ${RABBITMQ_USERNAME}
+    password: ${RABBITMQ_PASSWORD}
+  data:
+    cassandra:
+      keyspace-name: athena
+      contact-points: localhost
+      port: 9042
+
+cassandra:
+  migration:
+    keyspace-name: athena
+#
+#logging:
+#  level:
+#    org:
+#      springframework: DEBUG
