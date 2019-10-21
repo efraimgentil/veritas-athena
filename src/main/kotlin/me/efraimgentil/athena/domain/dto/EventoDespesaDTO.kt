@@ -1,8 +1,8 @@
 package me.efraimgentil.athena.domain
 
-import me.efraimgentil.checker.domain.DespesaDTO
+import me.efraimgentil.athena.domain.dto.ExpenseDTO
 
 data class EventoDespesaDTO(
         val deputadoId : Int,
-        val despesa : DespesaDTO
+        val expense : ExpenseDTO
 )

@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
 @Service
-@RabbitListener(queues = [RabbitMQConstants.EXPENSE_STORE_QUEUE])
+@RabbitListener(queues = [RabbitMQConstants.CONGRESSMAN_STORE_QUEUE])
 class EventoDeputadoListener(val deputadoStorageService: DeputadoStorageService) {
 
     @RabbitHandler

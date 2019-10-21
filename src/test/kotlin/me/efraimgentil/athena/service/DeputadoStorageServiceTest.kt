@@ -217,5 +217,4 @@ class DeputadoStorageServiceTest {
 
         verify { repository.save(expectedUpdate) }
     }
-
 }
