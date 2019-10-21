@@ -14,44 +14,44 @@ import org.springframework.context.annotation.Profile
 class LocalRabbitMQConfig {
 
     @Bean
-    fun deputadoDespesaStoreQueue() : Queue {
-        return Queue("deputadoDespesaStore", true)
+    fun expenseStoreQueue() : Queue {
+        return Queue(RabbitMQConstants.EXPENSE_STORE_QUEUE, true)
     }
 
     @Bean
-    fun deputadoDespesaTopic() : TopicExchange {
-        return TopicExchange("deputadoDespesa" , true , false)
+    fun expenseTopic() : TopicExchange {
+        return TopicExchange(RabbitMQConstants.EXPENSE_TOPIC , true , false)
     }
 
     @Bean
-    fun deputadoTopic() : TopicExchange {
-        return TopicExchange("deputado" , true , false)
+    fun congressmanTopic() : TopicExchange {
+        return TopicExchange(RabbitMQConstants.CONGRESSMAN_TOPIC , true , false)
     }
 
     @Bean
-    fun deputadoStore() : Queue {
-        return Queue("deputadoStore", true)
-    }
-
-    /**
-     * Bind the queue deputadoStore to the topic deputado
-     */
-    @Bean
-    fun bindingDeputadoStore(deputadoStore : Queue,
-                               deputadoTopic : TopicExchange) : Binding {
-        return BindingBuilder.bind(deputadoStore)
-                .to(deputadoTopic)
-                .with("")
+    fun congressmanStoreQueue() : Queue {
+        return Queue(RabbitMQConstants.CONGRESSMAN_STORE_QUEUE, true)
     }
 
     /**
-     * Bind the queue deputadoDespesaStore to the topic deputadoDespesa
+     * Bind EXPENSE_STORE_QUEUE to EXPENSE_TOPIC
      */
     @Bean
-    fun bindingDeputadoDespesa(deputadoDespesaStoreQueue : Queue,
-                               deputadoDespesaTopic : TopicExchange) : Binding {
-        return BindingBuilder.bind(deputadoDespesaStoreQueue)
-                .to(deputadoDespesaTopic)
-                .with("")
+    fun bindingExpenseStoreQueueToExpenseTopic(expenseStoreQueue : Queue,
+                               expenseTopic : TopicExchange) : Binding {
+        return BindingBuilder.bind(expenseStoreQueue)
+                .to(expenseTopic)
+                .with(RabbitMQConstants.NO_ROUTING)
+    }
+
+    /**
+     * Bind CONGRESSMAN_STORE_QUEUE to the CONGRESSMAN_TOPIC
+     */
+    @Bean
+    fun bindingCongressmanStoreQueueToCongressmanTopic(congressmanStoreQueue : Queue,
+                                                       congressmanTopic : TopicExchange) : Binding {
+        return BindingBuilder.bind(congressmanStoreQueue)
+                .to(congressmanTopic)
+                .with(RabbitMQConstants.NO_ROUTING)
     }
 }

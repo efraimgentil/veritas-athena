@@ -1,5 +1,6 @@
 package me.efraimgentil.athena.listener
 
+import me.efraimgentil.athena.config.RabbitMQConstants
 import me.efraimgentil.athena.domain.EventoDespesaDTO
 import org.springframework.amqp.rabbit.annotation.RabbitHandler
 import org.springframework.amqp.rabbit.annotation.RabbitListener
@@ -7,10 +8,8 @@ import org.springframework.stereotype.Service
 
 
 @Service
-@RabbitListener(queues = ["deputadoDespesaStore"], errorHandler = "defaultErrorHandler")
+@RabbitListener(queues = [RabbitMQConstants.CONGRESSMAN_STORE_QUEUE], errorHandler = "defaultErrorHandler")
 class EventoDespesaListener {
-
-
 
 //    {
 //        "ano": 2019,

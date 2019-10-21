@@ -1,5 +1,6 @@
 package me.efraimgentil.athena.listener
 
+import me.efraimgentil.athena.config.RabbitMQConstants
 import me.efraimgentil.athena.domain.DeputadoDTO
 import me.efraimgentil.athena.repository.DeputadoRepository
 import me.efraimgentil.athena.service.DeputadoStorageService
@@ -11,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
 @Service
-@RabbitListener(queues = ["deputadoStore"])
+@RabbitListener(queues = [RabbitMQConstants.EXPENSE_STORE_QUEUE])
 class EventoDeputadoListener(val deputadoStorageService: DeputadoStorageService) {
 
     @RabbitHandler
