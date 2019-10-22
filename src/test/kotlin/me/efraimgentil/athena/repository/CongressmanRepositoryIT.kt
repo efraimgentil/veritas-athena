@@ -16,11 +16,11 @@ import org.springframework.test.context.junit4.SpringRunner
 @RunWith(SpringRunner::class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT
         , properties = ["spring.profiles.active=test"])
-class DeputadoRepositoryIT {
+class CongressmanRepositoryIT {
 
 
     @Autowired
-    lateinit var repository : DeputadoRepository
+    lateinit var repository : CongressmanRepository
 
     @Test
     fun test() {

@@ -9,12 +9,12 @@ import org.springframework.stereotype.Service
 
 @Service
 @RabbitListener(queues = [RabbitMQConstants.CONGRESSMAN_STORE_QUEUE])
-class EventoDeputadoListener(val deputadoStorageService: CongressmanStorageService) {
+class CongressmanListener(val congressmanStorageService: CongressmanStorageService) {
 
     @RabbitHandler
-    fun handle(deputado : DeputadoDTO){
-        //logger.info("Received deputado event: ${deputado}")
-        deputadoStorageService.store(deputado)
+    fun handle(congressman : DeputadoDTO){
+        //logger.info("Received congressman event: ${congressman}")
+        congressmanStorageService.store(congressman)
     }
 
 }

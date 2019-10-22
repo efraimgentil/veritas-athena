@@ -6,7 +6,7 @@ import io.mockk.verify
 import me.efraimgentil.athena.domain.*
 import me.efraimgentil.athena.domain.type.OfficeType
 import me.efraimgentil.athena.domain.type.CongressmanStatusType
-import me.efraimgentil.athena.repository.DeputadoRepository
+import me.efraimgentil.athena.repository.CongressmanRepository
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -15,10 +15,10 @@ import java.time.LocalDate
 import java.util.*
 
 @RunWith(MockitoJUnitRunner::class)
-class DeputadoStorageServiceTest {
+class CongressmanStorageServiceTest {
 
     lateinit var service : CongressmanStorageService
-    lateinit var repository : DeputadoRepository
+    lateinit var repository : CongressmanRepository
 
     @Before
     fun init() {
