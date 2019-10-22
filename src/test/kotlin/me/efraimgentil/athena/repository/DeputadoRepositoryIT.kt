@@ -1,13 +1,12 @@
 package me.efraimgentil.athena.repository
 
-import me.efraimgentil.athena.domain.Deputado
-import me.efraimgentil.athena.domain.StatusDeputado
+import me.efraimgentil.athena.domain.Congressman
+import me.efraimgentil.athena.domain.type.CongressmanStatusType
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.context.junit4.SpringRunner
-import java.time.LocalDate
 
 //
 //@RunWith(SpringRunner::class)
@@ -25,37 +24,37 @@ class DeputadoRepositoryIT {
 
     @Test
     fun test() {
-        var status = StatusDeputado(
+        var status = CongressmanStatusType(
                 id = 1
-                , data = "2019-01-01"
+                , date = "2019-01-01"
                 , uri = "https://dadosabertos.camara.leg.br/api/v2/deputados/204554"
-                , nome = "ABÍLIO SANTANA"
-                , siglaPartido = "PL"
-                , uriPartido = "https://dadosabertos.camara.leg.br/api/v2/partidos/37906"
-                , siglaUf = "BA"
-                , idLegislatura = 56
-                , urlFoto = "https://www.camara.leg.br/internet/deputado/bandep/204554.jpg"
-                , nomeEleitoral = "ABÍLIO SANTANA"
-                , situacao = "Exercício"
-                , condicaoEleitoral = "Titular"
-                , descricaoStatus = null
-                , gabinete = null
+                , name = "ABÍLIO SANTANA"
+                , politicalPartyAcronym = "PL"
+                , politicalPartyUri = "https://dadosabertos.camara.leg.br/api/v2/partidos/37906"
+                , politicalPartyState = "BA"
+                , legislatureId = 56
+                , photoUrl = "https://www.camara.leg.br/internet/deputado/bandep/204554.jpg"
+                , electoralName = "ABÍLIO SANTANA"
+                , status = "Exercício"
+                , electoralCondition = "Titular"
+                , statusDescription = null
+                , office = null
         )
 
-        repository.save( Deputado(
+        repository.save( Congressman(
             id = 1
-            ,cpf = "99988844433"
-            ,dataFalecimento = null
-            ,dataNascimento = "1988-02-12"
-            ,escolaridade =  "Superior Completo"
-            ,municipioNascimento = "CE"
-            ,nomeCivil = "Solteiro"
-            ,sexo = "M"
-            ,ufNascimento = "CE"
-            ,ultimoStatus = status
-            ,ultimosStatus = null
+            ,identityDocument = "99988844433"
+            ,dateOfDeath = null
+            ,dateOfBirth = "1988-02-12"
+            ,education =  "Superior Completo"
+            ,municipalityOfBirth = "CE"
+            ,civilName = "Solteiro"
+            ,sex = "M"
+            ,stateOfBirth = "CE"
+            ,lastStatus = status
+            ,lastStatuses = null
             ,uri = null
-            ,urlWebsite = null
+            ,websiteUrl = null
         ) )
     }
 
