@@ -33,6 +33,11 @@ class LocalRabbitMQConfig {
         return Queue(RabbitMQConstants.CONGRESSMAN_STORE_QUEUE, true)
     }
 
+    @Bean
+    fun congressmanStatusStoreQueue() : Queue {
+        return Queue(RabbitMQConstants.CONGRESSMAN_STATUS_STORE_QUEUE, true)
+    }
+
     /**
      * Bind EXPENSE_STORE_QUEUE to EXPENSE_TOPIC
      */
@@ -51,6 +56,17 @@ class LocalRabbitMQConfig {
     fun bindingCongressmanStoreQueueToCongressmanTopic(congressmanStoreQueue : Queue,
                                                        congressmanTopic : TopicExchange) : Binding {
         return BindingBuilder.bind(congressmanStoreQueue)
+                .to(congressmanTopic)
+                .with(RabbitMQConstants.NO_ROUTING)
+    }
+
+    /**
+     * Bind CONGRESSMAN_STORE_QUEUE to the CONGRESSMAN_TOPIC
+     */
+    @Bean
+    fun bindingCongressmanStatusStoreQueueToCongressmanTopic(congressmanStatusStoreQueue : Queue,
+                                                       congressmanTopic : TopicExchange) : Binding {
+        return BindingBuilder.bind(congressmanStatusStoreQueue)
                 .to(congressmanTopic)
                 .with(RabbitMQConstants.NO_ROUTING)
     }

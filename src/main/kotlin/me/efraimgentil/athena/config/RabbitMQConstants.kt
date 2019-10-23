@@ -7,4 +7,5 @@ object RabbitMQConstants {
 
     const val CONGRESSMAN_TOPIC = "congressman"
     const val CONGRESSMAN_STORE_QUEUE = "congressmanStore"
+    const val CONGRESSMAN_STATUS_STORE_QUEUE = "congressmanStatusStore"
 }

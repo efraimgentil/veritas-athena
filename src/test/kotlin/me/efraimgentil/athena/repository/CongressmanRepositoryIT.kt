@@ -59,7 +59,7 @@ class CongressmanRepositoryIT {
     }
 
     @Test
-    fun testeLoad(){
+    fun testLoad(){
         val findById = repository.findById(1);
         println(findById)
     }

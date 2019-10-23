@@ -1,0 +1,6 @@
+package me.efraimgentil.athena.repository
+
+import me.efraimgentil.athena.domain.CongressmanStatus
+import org.springframework.data.cassandra.repository.MapIdCassandraRepository
+
+interface CongressmanStatusRepository : MapIdCassandraRepository<CongressmanStatus>

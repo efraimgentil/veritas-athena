@@ -8,13 +8,17 @@ import org.springframework.amqp.rabbit.annotation.RabbitListener
 import org.springframework.stereotype.Service
 
 @Service
-@RabbitListener(queues = [RabbitMQConstants.CONGRESSMAN_STORE_QUEUE])
 class CongressmanListener(val congressmanStorageService: CongressmanStorageService) {
 
-    @RabbitHandler
-    fun handle(congressman : DeputadoDTO){
+    @RabbitListener(queues = [RabbitMQConstants.CONGRESSMAN_STORE_QUEUE])
+    fun handleCongressmanStore(congressman : DeputadoDTO){
         //logger.info("Received congressman event: ${congressman}")
         congressmanStorageService.store(congressman)
     }
 
+    @RabbitListener(queues = [RabbitMQConstants.CONGRESSMAN_STATUS_STORE_QUEUE])
+    fun handleCongressmanStatusStore(congressman : DeputadoDTO){
+        //logger.info("Received congressman event: ${congressman}")
+        congressmanStorageService.store(congressman)
+    }
 }

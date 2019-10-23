@@ -1,8 +1,8 @@
 CREATE TABLE congressman_status (
      congressman_id int
-   , legislature_id varchar
-   , date varchar
+   , legislature_id int
+   , datetime timestamp
    , status varchar
-   , party varchar
-   , PRIMARY KEY (congressman_id, legislature_id)
-);
+   , political_party_acronym varchar
+   , PRIMARY KEY (congressman_id, datetime)
+) WITH CLUSTERING ORDER BY (datetime DESC);
