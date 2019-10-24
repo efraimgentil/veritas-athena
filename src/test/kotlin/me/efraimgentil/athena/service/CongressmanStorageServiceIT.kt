@@ -8,26 +8,34 @@ import me.efraimgentil.athena.domain.type.OfficeType
 import me.efraimgentil.athena.domain.type.CongressmanStatusType
 import me.efraimgentil.athena.repository.CongressmanRepository
 import me.efraimgentil.athena.repository.CongressmanStatusRepository
+import org.assertj.core.api.Assertions
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.runners.MockitoJUnitRunner
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.data.cassandra.core.mapping.BasicMapId
+import org.springframework.test.context.junit4.SpringRunner
 import java.time.Instant
 import java.time.LocalDate
 import java.util.*
 
-@RunWith(MockitoJUnitRunner::class)
-class CongressmanStorageServiceTest {
+@RunWith(SpringRunner::class)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT
+        , properties = ["spring.profiles.active=test"])
+class CongressmanStorageServiceIT {
 
+    @Autowired
     lateinit var service : CongressmanStorageService
+    @Autowired
     lateinit var congressmanRepository : CongressmanRepository
+    @Autowired
     lateinit var congressmanStatusRepository : CongressmanStatusRepository
 
     @Before
     fun init() {
-        congressmanRepository = mockk()
-        congressmanStatusRepository = mockk()
         service = CongressmanStorageService(congressmanRepository, congressmanStatusRepository)
     }
 
@@ -203,56 +211,15 @@ class CongressmanStorageServiceTest {
     )
 
     @Test
-    fun shouldSaveANewCongressman(){
-        every { congressmanRepository.findById(1) } returns Optional.empty()
-        every { congressmanRepository.save(ofType(Congressman::class)) } returns expectedDeputado
-
-        service.store(input)
-
-        verify { congressmanRepository.save(expectedDeputado) }
-    }
-
-    @Test
-    fun shouldSaveAExistingCongressman(){
-        every { congressmanRepository.findById(1) } returns Optional.of(existingDeputado)
-        every { congressmanRepository.save(ofType(Congressman::class)) } returns expectedUpdate
-
-        service.store(input)
-
-        verify { congressmanRepository.save(expectedUpdate) }
-    }
-
-    @Test
-    fun shouldSaveCongressmanStatus(){
-        every { congressmanStatusRepository.findById(BasicMapId.id("congressmanId" , 1))} returns Optional.empty<CongressmanStatus>()
-        every { congressmanStatusRepository.save(ofType(CongressmanStatus::class)) } returns mockk()
+    fun shouldNotSaveMultipleRowsForTheSameCongressmanStatus(){
+        val congressmanId = input.id
+        val statusDatetime = Instant.parse(input.ultimoStatus!!.data + ":00-03:00")
+        service.addStatusIfNeeded(input)
+        var numOfRows = congressmanStatusRepository.countByCongressmanIdAndDatetime(congressmanId, statusDatetime)
+        assertThat(numOfRows).isEqualTo(1L)
 
         service.addStatusIfNeeded(input)
-
-        verify { congressmanStatusRepository.save(CongressmanStatus(
-                congressmanId = input.id
-                , legislatureId =  input.ultimoStatus!!.idLegislatura
-                , datetime = Instant.parse(input.ultimoStatus!!.data + ":00-03:00")
-                , status =  input.ultimoStatus!!.situacao
-                , politicalPartyAcronym = input.ultimoStatus!!.siglaPartido
-        )) }
+        numOfRows = congressmanStatusRepository.countByCongressmanIdAndDatetime(congressmanId, statusDatetime)
+        assertThat(numOfRows).isEqualTo(1L)
     }
-
-    @Test
-    fun shouldNotSaveCongressmanStatusWhenTheStatusAlreadyExists(){
-        every { congressmanStatusRepository.findById(BasicMapId.id("congressmanId", 1)
-                .with("datetime", Instant.parse(input.ultimoStatus!!.data + ":00-03:00")))
-        } returns Optional.of(CongressmanStatus(
-                congressmanId = input.id
-                , legislatureId =  input.ultimoStatus!!.idLegislatura
-                , datetime = Instant.parse(input.ultimoStatus!!.data + ":00-03:00")
-                , status =  input.ultimoStatus!!.situacao
-                , politicalPartyAcronym = input.ultimoStatus!!.siglaPartido
-                ))
-        every { congressmanStatusRepository.save(ofType(CongressmanStatus::class)) } returns mockk()
-
-        service.addStatusIfNeeded(input)
-
-        verify(exactly = 0) { congressmanStatusRepository.save(ofType(CongressmanStatus::class)) }
-     }
 }

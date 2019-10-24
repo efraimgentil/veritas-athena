@@ -7,6 +7,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.data.cassandra.core.mapping.BasicMapId
 import org.springframework.test.context.junit4.SpringRunner
 import java.time.Instant
 import java.time.temporal.ChronoUnit
@@ -24,16 +25,21 @@ class CongressmanStatusRepositoryIT {
 
     @Test
     fun test() {
+        println( Instant.parse("2019-02-01T11:45" + ":00-03:00") )
 
-        for( i in 1..1000 ){
-            congressmanStatusRepository.save(CongressmanStatus(
-                      congressmanId = Random().nextInt(5)
-                    , datetime = Instant.now().minus( Random().nextInt(100).toLong() , ChronoUnit.DAYS )
-                    , legislatureId = 1
-                    , status = "MEEEEH"
-                    , politicalPartyAcronym = "PT"
-            ))
-        }
+
+        val findById = congressmanStatusRepository.findById(BasicMapId.id("id", 1))
+        print(findById);
+
+//        for( i in 1..1000 ){
+//            congressmanStatusRepository.save(CongressmanStatus(
+//                      congressmanId = Random().nextInt(5)
+//                    , datetime = Instant.now().minus( Random().nextInt(100).toLong() , ChronoUnit.DAYS )
+//                    , legislatureId = 1
+//                    , status = "MEEEEH"
+//                    , politicalPartyAcronym = "PT"
+//            ))
+//        }
 
 //
 //        repository.save( Congressman(

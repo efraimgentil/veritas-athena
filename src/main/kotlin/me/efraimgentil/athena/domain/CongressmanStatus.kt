@@ -6,6 +6,8 @@ import org.springframework.data.cassandra.core.mapping.PrimaryKeyColumn
 import org.springframework.data.cassandra.core.mapping.Table
 import java.time.Instant
 
+const val CONGRESSMAN_STATUS_ID = "congressmanId"
+const val CONGRESSMAN_STATUS_DATETIME = "congressman_id"
 
 @Table("congressman_status")
 data class CongressmanStatus(
