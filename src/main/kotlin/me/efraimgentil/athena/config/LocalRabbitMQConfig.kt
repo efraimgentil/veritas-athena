@@ -19,9 +19,37 @@ class LocalRabbitMQConfig {
     }
 
     @Bean
+    fun expenseStoreByYearMonthQuotaDocQueue() : Queue {
+        return Queue(RabbitMQConstants.EXPENSE_STORE_BY_YEAR_MONTH_QUOTA_DOC, true)
+    }
+
+    @Bean
     fun expenseTopic() : TopicExchange {
         return TopicExchange(RabbitMQConstants.EXPENSE_TOPIC , true , false)
     }
+
+    /**
+     * Bind EXPENSE_STORE_QUEUE to EXPENSE_TOPIC
+     */
+    @Bean
+    fun bindingExpenseStoreQueueToExpenseTopic(expenseStoreQueue : Queue,
+                                               expenseTopic : TopicExchange) : Binding {
+        return BindingBuilder.bind(expenseStoreQueue)
+                .to(expenseTopic)
+                .with(RabbitMQConstants.NO_ROUTING)
+    }
+
+    /**
+     * Bind EXPENSE_STORE_QUEUE to EXPENSE_TOPIC
+     */
+    @Bean
+    fun bindingExpenseStoreByYearMonthQuotaDocQueueToExpenseTopic(expenseStoreByYearMonthQuotaDocQueue : Queue,
+                                               expenseTopic : TopicExchange) : Binding {
+        return BindingBuilder.bind(expenseStoreByYearMonthQuotaDocQueue)
+                .to(expenseTopic)
+                .with(RabbitMQConstants.NO_ROUTING)
+    }
+
 
     @Bean
     fun congressmanTopic() : TopicExchange {
@@ -38,16 +66,7 @@ class LocalRabbitMQConfig {
         return Queue(RabbitMQConstants.CONGRESSMAN_STATUS_STORE_QUEUE, true)
     }
 
-    /**
-     * Bind EXPENSE_STORE_QUEUE to EXPENSE_TOPIC
-     */
-    @Bean
-    fun bindingExpenseStoreQueueToExpenseTopic(expenseStoreQueue : Queue,
-                               expenseTopic : TopicExchange) : Binding {
-        return BindingBuilder.bind(expenseStoreQueue)
-                .to(expenseTopic)
-                .with(RabbitMQConstants.NO_ROUTING)
-    }
+
 
     /**
      * Bind CONGRESSMAN_STORE_QUEUE to the CONGRESSMAN_TOPIC
