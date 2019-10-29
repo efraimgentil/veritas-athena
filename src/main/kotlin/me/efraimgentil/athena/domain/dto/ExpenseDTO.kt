@@ -9,7 +9,7 @@ data class ExpenseDTO(
     var descricao: String? = null,
     var descricaoEspecificacao: String? = null,
     var fornecedor: String? = null,
-    var idDeputado: Long? = null,
+    var idDeputado: Int? = null,
     var idDocumento: Long? = null,
     var legislatura: Int? = null,
     var lote: String? = null,

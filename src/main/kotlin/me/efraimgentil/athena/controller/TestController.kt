@@ -1,6 +1,5 @@
 package me.efraimgentil.athena.controller
 
-import me.efraimgentil.athena.domain.dto.ExpenseDTO
 import org.springframework.amqp.rabbit.core.RabbitTemplate
 import org.springframework.context.annotation.Profile
 import org.springframework.http.ResponseEntity
