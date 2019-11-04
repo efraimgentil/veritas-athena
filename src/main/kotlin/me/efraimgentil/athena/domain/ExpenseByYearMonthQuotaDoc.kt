@@ -6,6 +6,7 @@ import org.springframework.data.cassandra.core.mapping.Column
 import org.springframework.data.cassandra.core.mapping.PrimaryKeyColumn
 import org.springframework.data.cassandra.core.mapping.Table
 import java.math.BigDecimal
+import java.time.Instant
 import java.util.*
 
 @Table("expense_by_year_month_quota_doc")
@@ -20,8 +21,8 @@ data class ExpenseByYearMonthQuotaDoc (
         val quota : Int,
         @PrimaryKeyColumn(name = "document_id", ordinal = 4, type = PrimaryKeyType.CLUSTERED)
         val documentId : Long,
-        @Column("date")
-        val date : Date,
+        @Column("datetime")
+        val datetime : Instant,
         @Column("allotment")
         val allotment : Int,
         @Column("description")
@@ -35,17 +36,17 @@ data class ExpenseByYearMonthQuotaDoc (
 ) {
         companion object {
                 fun from(expenseDTO: ExpenseDTO) = ExpenseByYearMonthQuotaDoc(
-                        congressmanId = expenseDTO.idDeputado!!
-                        , year = expenseDTO.ano!!
-                        , month = expenseDTO.mes!!
-                        , quota = expenseDTO.numeroSubCota!!
-                        , documentId = expenseDTO.idDocumento!!
-                        , date = Date(Date.parse(expenseDTO.dataEmissao!!))
-                        , allotment = expenseDTO.lote!!.toInt()
-                        , description = expenseDTO.descricao!!
-                        , documentValue = expenseDTO.valorDocumento!!.toBigDecimal()
-                        , glossValue = expenseDTO.valorGlosa!!.toBigDecimal()
-                        , netValue = expenseDTO.valorLiquido!!.toBigDecimal()
+                        congressmanId = expenseDTO.congressmanId!!
+                        , year = expenseDTO.year!!
+                        , month = expenseDTO.month!!
+                        , quota = expenseDTO.subQuotaNumber!!
+                        , documentId = expenseDTO.documentId!!
+                        , datetime = Instant.parse(expenseDTO.issuanceDate!! + "-03:00") //TODO maybe apply some transformation pipeline
+                        , allotment = expenseDTO.allotment!!.toInt()
+                        , description = expenseDTO.description!!
+                        , documentValue = expenseDTO.documentValue!!.toBigDecimal()
+                        , glossValue = expenseDTO.glossValue!!.toBigDecimal()
+                        , netValue = expenseDTO.netValue!!.toBigDecimal()
                 )
         }
 }

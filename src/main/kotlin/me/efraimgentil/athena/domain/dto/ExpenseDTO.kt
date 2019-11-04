@@ -1,34 +1,66 @@
 package me.efraimgentil.athena.domain.dto
 
+import com.fasterxml.jackson.annotation.JsonProperty
+
 data class ExpenseDTO(
-    var ano: Int? = null,
-    var cnpjCPF: String? = null,
-    var codigoLegislatura: Int? = null,
-    var cpf: String? = null,
-    var dataEmissao: String? = null,
-    var descricao: String? = null,
-    var descricaoEspecificacao: String? = null,
-    var fornecedor: String? = null,
-    var idDeputado: Int? = null,
-    var idDocumento: Long? = null,
-    var legislatura: Int? = null,
-    var lote: String? = null,
-    var mes: Int? = null,
-    var nomeParlamentar: String? = null,
-    var numero: String? = null,
-    var numeroCarteiraParlamentar: String? = null,
-    var numeroDeputadoID: Int? = null,
-    var numeroEspecificacaoSubCota: Int? = null,
-    var numeroSubCota: Int? = null,
-    var parcela: Int? = null,
-    var passageiro: String? = null,
-    var ressarcimento: String? = null,
-    var restituicao: String? = null,
-    var siglaPartido: String? = null,
-    var siglaUF: String? = null,
-    var tipoDocumento: String? = null,
-    var trecho: String? = null,
-    var valorDocumento: String? = null,
-    var valorGlosa: String? = null,
-    var valorLiquido: String? = null
+        @JsonProperty("ano")
+        var year: Int? = null,
+        @JsonProperty("mes")
+        var month: Int? = null,
+        @JsonProperty("codigoLegislatura")
+        var legislatureCode: Int? = null,
+        @JsonProperty("cpf")
+        var identityDocument: String? = null,
+        @JsonProperty("dataEmissao")
+        var issuanceDate: String? = null,
+        @JsonProperty("descricao")
+        var description: String? = null,
+        @JsonProperty("descricaoEspecificacao")
+        var specificationDescription: String? = null,
+        @JsonProperty("fornecedor")
+        var supplier: String? = null,
+        @JsonProperty("cnpjCPF")
+        var supplierIdentityDocument: String? = null,
+        @JsonProperty("idDeputado")
+        var congressmanId: Int? = null,
+        @JsonProperty("idDocumento")
+        var documentId: Long? = null,
+        @JsonProperty("legislatura")
+        var legislature: Int? = null,
+        @JsonProperty("lote")
+        var allotment: String? = null,
+        @JsonProperty("nomeParlamentar")
+        var congressmanName: String? = null,
+        @JsonProperty("numero")
+        var number: String? = null,
+        @JsonProperty("numeroCarteiraParlamentar")
+        var numberParliamentarian: String? = null,
+        @JsonProperty("numeroDeputadoID")
+        var numberCongressmanId: Int? = null,
+        @JsonProperty("numeroEspecificacaoSubCota")
+        var subQuotaSpecNumber: Int? = null,
+        @JsonProperty("numeroSubCota")
+        var subQuotaNumber: Int? = null,
+        @JsonProperty("parcela")
+        var parcel: Int? = null,
+        @JsonProperty("passageiro")
+        var passenger: String? = null,
+        @JsonProperty("ressarcimento")
+        var repayment: String? = null,
+        @JsonProperty("restituicao")
+        var refund: String? = null,
+        @JsonProperty("siglaPartido")
+        var politicalPartyAcronym: String? = null,
+        @JsonProperty("siglaUF")
+        var politicalPartyState: String? = null,
+        @JsonProperty("tipoDocumento")
+        var documentType: String? = null,
+        @JsonProperty("trecho")
+        var destination: String? = null,
+        @JsonProperty("valorDocumento")
+        var documentValue: String? = null,
+        @JsonProperty("valorGlosa")
+        var glossValue: String? = null,
+        @JsonProperty("valorLiquido")
+        var netValue: String? = null
 )

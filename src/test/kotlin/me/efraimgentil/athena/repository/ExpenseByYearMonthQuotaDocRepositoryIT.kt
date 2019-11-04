@@ -2,6 +2,7 @@ package me.efraimgentil.athena.repository
 
 import me.efraimgentil.athena.domain.Congressman
 import me.efraimgentil.athena.domain.CongressmanStatus
+import me.efraimgentil.athena.domain.ExpenseByYearMonthQuotaDoc
 import me.efraimgentil.athena.domain.dto.ExpenseDTO
 import me.efraimgentil.athena.domain.type.CongressmanStatusType
 import org.junit.Test
@@ -18,20 +19,54 @@ import java.util.*
 @RunWith(SpringRunner::class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT
         , properties = ["spring.profiles.active=test"])
-class CongressmanStatusRepositoryIT {
-
+class ExpenseByYearMonthQuotaDocRepositoryIT {
 
     @Autowired
-    lateinit var congressmanStatusRepository: CongressmanStatusRepository
+    lateinit var repository: ExpenseByYearMonthQuotaDocRepository
 
     @Test
     fun test() {
         println( Instant.parse("2019-02-01T11:45" + ":00-03:00") )
 
 
+        val expenseDTO = ExpenseDTO(
+                congressmanName = "PAULO FOLETTO"
+                , identityDocument = "47909463715"
+                , congressmanId = 160517
+                , numberParliamentarian = "280"
+                , politicalPartyState = "ES"
+                , legislature = 2015
+                , politicalPartyAcronym = "PSB"
+                , legislatureCode = 55
+                , subQuotaNumber = 1
+                , description = "MANUTENÇÃO DE ESCRITÓRIO DE APOIO À ATIVIDADE PARLAMENTAR"
+                , subQuotaSpecNumber = 0
+                , specificationDescription = ""
+                , supplier = "Maria da Penha Rondini"
+                , supplierIdentityDocument = "113.785.306/91  -  "
+                , number = "S/N"
+                , documentType = "1"
+                , issuanceDate = "2019-01-31T00:00:00"
+                , documentValue = "2749.11"
+                , glossValue = "0"
+                , netValue = "2749.11"
+                , month = 1
+                , year = 2019
+                , parcel = 0
+                , passenger = ""
+                , destination = ""
+                , allotment = "1558008"
+                , repayment = ""
+                , refund = ""
+                , numberCongressmanId = 2317
+                , documentId = 6744975
+        )
 
-        val findById = congressmanStatusRepository.findById(BasicMapId.id("id", 1))
-        print(findById);
+        repository.save(ExpenseByYearMonthQuotaDoc.from(expenseDTO))
+
+        println( repository.findAll() )
+//        val findById = repository.findById(BasicMapId.id("id", 1))
+//        print(findById);
 
 //        for( i in 1..1000 ){
 //            congressmanStatusRepository.save(CongressmanStatus(
@@ -59,11 +94,5 @@ class CongressmanStatusRepositoryIT {
 //            ,uri = null
 //            ,websiteUrl = null
 //        ) )
-    }
-
-    @Test
-    fun testeLoad(){
-//        val findById = repository.findById(1);
-//        println(findById)
     }
 }
